@@ -10,7 +10,7 @@ on:
 
 jobs:
   build:
-
+      
     runs-on: ubuntu-latest
 
     strategy:
@@ -29,4 +29,25 @@ jobs:
     - run: npm ci
     - run: npm test
     - run: npm run build --if-present
+  build2:
+    needs: build
+    name: pushserver
+    runs-on: ubuntu-latest
+    steps:
+    - name: remote ssh
+      uses: appleboy/ssh-action@v0.1.10
+      with:
+        host: ${{ secrets.HOST }}
+        username: ${{ secrets.USERNAME }}
+        key: ${{ secrets.PRIVATEKEY }}
+        port: 22
+        script: |
+          cd ~/home/testserver1/tele_bot
+          git pull origin master
+          git status
+          npm install
+          pm2 restart index
+        
+    
+    
 
