@@ -38,7 +38,7 @@ jobs:
       with:
         host: ${{ secrets.HOST }}
         username: ${{ secrets.USERNAME }}
-        key: ${{ secrets.PRIVATEKEY }}
+        password: ${{ secrets.PASSWORD }}
         port: 22
         script: |
           cd ~/home/testserver1/tele_bot
