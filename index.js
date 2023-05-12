@@ -8,12 +8,14 @@ const bot = new Telegraf(process.env.BOT_TOKEN);
 
 // Menambahkan handler untuk perintah /start
 bot.start((ctx) => {
+  ctx.telegram.sendChatAction(ctx.chat.id, "read");
   ctx.reply(
     "Selamat datang di bot helldut. Untuk commandnya:\n/password [panjang karakter]"
   );
 });
 
 const getLatestNews = async (ctx) => {
+  ctx.telegram.sendChatAction(ctx.chat.id, "read");
   const API_KEY = process.env.NEWS_API_KEY;
 
   try {
@@ -52,6 +54,7 @@ bot.command("news", getLatestNews);
 
 // Menambahkan handler untuk perintah /password
 bot.command("password", async (ctx) => {
+  ctx.telegram.sendChatAction(ctx.chat.id, "read");
   try {
     const passwordLength = parseInt(ctx.message.text.split(" ")[1]);
 
