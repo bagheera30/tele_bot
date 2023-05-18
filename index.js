@@ -115,3 +115,20 @@ function generateRandomPassword(length) {
 
   return password;
 }
+function generateEmailAndPassword() {
+  const emailLength = 10;
+  const emailCharset = "abcdefghijklmnopqrstuvwxyz0123456789";
+  let email = "";
+
+  for (let i = 0; i < emailLength; i++) {
+    const randomIndex = Math.floor(Math.random() * emailCharset.length);
+    email += emailCharset[randomIndex];
+  }
+
+  const password = generateRandomPassword(12); // Menggunakan password acak dengan panjang 12 karakter
+
+  return {
+    email: `${email}@gmail.com`,
+    password: password,
+  };
+}
