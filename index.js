@@ -74,6 +74,23 @@ bot.command("password", async (ctx) => {
     ctx.reply("Terjadi kesalahan. Mohon coba lagi nanti.");
   }
 });
+// Menambahkan handler untuk perintah /email
+bot.command("email", async (ctx) => {
+  ctx.telegram.sendChatAction(ctx.chat.id, "read");
+  try {
+    const emailPasswordPair = generateEmailAndPassword();
+
+    ctx.reply(
+      `Email: ${emailPasswordPair.email}\nPassword: ${emailPasswordPair.password}`
+    );
+
+    // Mengaktifkan email secara otomatis
+    activateEmail(emailPasswordPair.email, emailPasswordPair.password);
+  } catch (err) {
+    console.error("Error:", err);
+    ctx.reply("Terjadi kesalahan. Mohon coba lagi nanti.");
+  }
+});
 
 // Memulai bot
 bot
